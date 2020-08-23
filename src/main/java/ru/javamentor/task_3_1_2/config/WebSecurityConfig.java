@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers( "/css/**","/resources/**","/static/**","/js/**").permitAll()
+                .antMatchers("/static/css/**","/resources/**","/static/**", "/static/js/**").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/", "/registration", "/test", "/index", "/login").anonymous()
                 .antMatchers("/user", "/user/*", "/test", "/index").authenticated()

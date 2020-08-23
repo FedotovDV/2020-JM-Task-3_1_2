@@ -1,6 +1,7 @@
 package ru.javamentor.task_3_1_2.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,6 +26,7 @@ public class User implements UserDetails {
     @Transient
     private String confirmPassword;
 
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)

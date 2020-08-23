@@ -15,16 +15,8 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" th:text="${authentication.getName()}">Navbar w/ text</a>
-
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <a style="color: white" class="text-md-left">with roles: USER </a>
-        </ul>
-        <a style="color: white" class="btn btn-md btn-link" th:href="@{/logout}" role="button">Logout</a>
-    </div>
-</nav>
+<!--header-->
+<header th:insert="blocks/header::header"></header>
 <div class="card-group">
     <div class="form-text col-2">
                <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">

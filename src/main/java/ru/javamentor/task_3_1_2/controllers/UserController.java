@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/")
 public class UserController {
 
     private final UserService userService;
@@ -48,13 +47,11 @@ public class UserController {
 
     @PostMapping("/index")
     public ModelAndView indexPost(@ModelAttribute("usernew") String user) {
-        System.out.println( user);
+        System.out.println(user);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return modelAndView;
     }
-
-
 
 
     @GetMapping("/registration")
@@ -106,10 +103,10 @@ public class UserController {
     @GetMapping("/admin")
     public ModelAndView admin(ModelAndView modelAndView, Authentication authentication) {
         String email = authentication.getName();
-        User admin = (User) userService.loadUserByUsername(email);
+        User user = (User) userService.loadUserByUsername(email);
         String titleRole = "ADMIN";
         List<User> users = userService.findAll();
-        modelAndView.addObject("admin", admin);
+
         modelAndView.addObject("titleRole", titleRole);
         modelAndView.addObject("users", users);
         modelAndView.addObject("authentication", authentication);
@@ -121,9 +118,9 @@ public class UserController {
 
     @PostMapping({"/admin"})
     public ModelAndView adminPost(@ModelAttribute("usernew") User user, BindingResult result,
-                                @RequestParam(value = "userRole", required = false) String userRole,
-                                @RequestParam(value = "adminRole", required = false) String adminRole) {
-        System.out.println("User "+ user.getName());
+                                  @RequestParam(value = "userRole", required = false) String userRole,
+                                  @RequestParam(value = "adminRole", required = false) String adminRole) {
+        System.out.println("User " + user.getName());
         userValidator.validate(user, result);
         if (result.hasErrors()) {
             ModelAndView modelAndView = new ModelAndView();
@@ -145,8 +142,6 @@ public class UserController {
     }
 
 
-
-
     @PostMapping({"/admin/add"})
     public ModelAndView addPost(@ModelAttribute("usernew") User user,
                                 @RequestParam(value = "userRole", required = false) String userRole,
@@ -164,13 +159,20 @@ public class UserController {
     }
 
 
-    @GetMapping("/admin/update")
-    public ModelAndView updateGet(@RequestParam Long id, ModelAndView model) {
-        model.setViewName("edit-user");
+//    @GetMapping("/admin/update")
+//
+//    public User updateGet(@RequestParam Long id) {
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!User updateGet = " + id);
+//        User user = userService.findById(id);
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!User  " + user.getName());
+//        return user;
+//    }
+
+    @GetMapping("/admin/update/{id}")
+    public String updateUserForm(@PathVariable("id") Long id, Model model){
         User user = userService.findById(id);
-        model.addObject("user", user);
-        model.addObject("roles", new HashSet<Role>());
-        return model;
+        model.addAttribute("user", user);
+        return "admin";
     }
 
     @PostMapping("/admin/update")

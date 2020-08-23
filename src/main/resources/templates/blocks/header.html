@@ -1,0 +1,18 @@
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <label class="navbar-brand" th:text="${authentication.getName()}">Navbar w/ text</label>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <label style="color: white" class="text-md-left">with roles:</label>
+                    <th:block th:each="role : ${authentication.getAuthorities()}">
+                        <label style="color: white" class="mx-1" th:text="${role.name()}"></label>
+                    </th:block>
+                </ul>
+                <a style="color: white" class="btn btn-md btn-link" th:href="@{/logout}" role="button">Logout</a>
+            </div>
+        </div>
+    </nav>
+</div>
