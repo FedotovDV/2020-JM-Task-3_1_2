@@ -115,18 +115,16 @@ public class UserController {
     public ModelAndView admin(ModelAndView modelAndView, Authentication authentication) {
         String titleRole = "ADMIN";
         List<User> users = userService.findAll();
-        System.out.println("ModelAndView admin 1 "+modelAndView.toString());
-        String email = authentication.getName();
-        User user = (User) userService.loadUserByUsername(email);
-        modelAndView.addObject("user", user);
-        modelAndView.addObject("roles", new HashSet<Role>());
+//        String email = authentication.getName();
+//        User user = (User) userService.loadUserByUsername(email);
+//        modelAndView.addObject("user", user);
+//        modelAndView.addObject("roles", new HashSet<Role>());
         modelAndView.addObject("titleRole", titleRole);
         modelAndView.addObject("users", users);
         modelAndView.addObject("authentication", authentication);
         modelAndView.addObject("usernew", new User());
         modelAndView.addObject("rolesnew", new HashSet<Role>());
         modelAndView.setViewName("/admin-page");
-        System.out.println("ModelAndView admin 2 "+ modelAndView.toString());
         return modelAndView;
     }
 

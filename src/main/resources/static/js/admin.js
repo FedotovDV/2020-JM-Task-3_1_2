@@ -5,8 +5,8 @@ $('document').ready(function () {
 
         $.get(href, function (user) {
             alert(user.name);
-            $('body').add('<div th:insert="blocks/edit-user::edit-form"></div>');
-            $('#editModal').modal();
+            // $('body').add('<div th:insert="blocks/edit-user::edit-form"></div>');
+            // $('#editModal').modal();
         });
 
     });
