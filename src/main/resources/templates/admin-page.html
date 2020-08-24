@@ -89,13 +89,13 @@
                                         </th:block>
                                     </td>
                                     <td>
-                                        <a th:href="@{/admin/update(id=${user.id})}"
-                                                class="btn btn-outline-info" role="button-edit">Edit
-                                        </a>
+                                        <button-edit th:href="@{/admin/update(id=${user.id})}"
+                                                class="btn btn-outline-info" role="button-edit"  data-toggle="modal" data-target="#editModal">Edit
+                                        </button-edit>
                                     </td>
                                     <td>
-                                        <a th:href="@{/admin/delete(id=${user.id})}"
-                                                class="btn btn-outline-danger" role="button-edit">
+                                        <a id="button-delete" th:href="@{/admin/delete(id=${user.id})}"
+                                                class="btn btn-outline-danger" role="button-delete">
                                             Delete
                                         </a>
                                     </td>
@@ -176,7 +176,7 @@
 </div>
 
 
-        <div th:insert="blocks/edit-user::edit-form"></div>
+<!--        <div th:insert="blocks/edit-user::edit-form"></div>-->
 
 
 <!-- JS, Popper.js, and jQuery -->
