@@ -10,7 +10,11 @@ $('document').ready(function () {
             $('#age').attr('value', user.age);
             $('#email').attr('value', user.email);
             $('#password').attr('value', user.password);
+
+
         });
         $('#editModal').showModal();
     });
 })
+
+
