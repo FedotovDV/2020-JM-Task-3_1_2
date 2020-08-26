@@ -137,6 +137,7 @@ public class UserController {
         System.out.println("updateUser "+ id);
 
         User user = userService.findById(id);
+        System.out.println(user.toString());
 
         return user;
     }

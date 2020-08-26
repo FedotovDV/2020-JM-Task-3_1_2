@@ -1,9 +1,23 @@
+*{
+    margin:0px;
+}
+
+
 .modal-body{
 
     align-items: center;
 }
 .card-edit {
-    width: 260px;
+    padding-right: 80px;
+    padding-left: 80px;
 
 }
 
+label{
+    font-weight: bold
+}
+
+#role-select{
+    hight: 20px;
+    weight: 60px;
+}
