@@ -22,23 +22,18 @@ $('document').ready(function () {
 
 
     $("#editModal").on('show.bs.modal', function (event) {
-        var userId = $(event.relatedTarget).data('user-id');
+        let userId = $(event.relatedTarget).data('user-id');
         const href = "/admin/update?id=" + userId;
-        let roles = [];
-        $.get(href, function (user) {
-            $('#id').val(user.id);
-            $('#name').attr('value', user.name);
-            $('#surname').attr('value', user.surname);
-            $('#age').attr('value', user.age);
-            $('#email').attr('value', user.email);
-            $('#password').attr('value', user.password);
-            $('#role-select').val(user.authorities);
+        $.get(href, function (data) {
+            $('#id').val(data.id);
+            $('#name').val(data.name);
+            $('#surname').val(data.surname);
+            $('#age').val(data.age);
+            $('#email').val(data.email);
+            $('#password').val(data.password);
+            $('#role-select').val(data.authorities);
 
         });
-
-        // $('#id').attr('value',"Id="+ userId);<option th:each="role : ${user.getRoles()}"
-        //                                                 th:value="${role.name()}"
-        //                                                 th:text="${role.name()}"></option>
     });
 
 })

@@ -133,17 +133,22 @@ public class UserController {
     @GetMapping("/admin/update")
     @ResponseBody
     public   User updateUser(@RequestParam("id") Long id){
-
-        System.out.println("updateUser "+ id);
-
         User user = userService.findById(id);
-        System.out.println(user.toString());
-
         return user;
     }
 
 
+    @GetMapping("/admin/add")
+    @ResponseBody
+    public User addGet() {
+               return new User();
+    }
 
+    @GetMapping("/admin/role")
+    @ResponseBody
+    public HashSet<Role> roleGet() {
+        return new HashSet<Role>();
+    }
 
 
     @GetMapping(value = "/login")
