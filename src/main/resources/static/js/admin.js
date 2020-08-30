@@ -86,4 +86,21 @@ $('document').ready(function () {
         });
     });
 
+
+    $("#deleteModal").on('show.bs.modal', function (event) {
+        let userId = $(event.relatedTarget).data('user-id');
+        const href = "/admin/delete?id=" + userId;
+        $.get(href, function (data) {
+            $('#idDelete').val(data.id);
+            $('#nameDelete').val(data.name);
+            $('#surnameDelete').val(data.surname);
+            $('#ageDelete').val(data.age);
+            $('#emailDelete').val(data.email);
+            $('#passwordDelete').val(data.password);
+            $('#role-selectDelete').val(data.authorities);
+
+        });
+    });
+
+
 })

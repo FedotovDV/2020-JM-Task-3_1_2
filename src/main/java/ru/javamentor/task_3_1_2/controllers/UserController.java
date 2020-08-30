@@ -137,6 +137,12 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("/admin/delete")
+    @ResponseBody
+    public   User deleteUser(@RequestParam("id") Long id){
+        User user = userService.findById(id);
+        return user;
+    }
 
     @GetMapping("/admin/add")
     @ResponseBody

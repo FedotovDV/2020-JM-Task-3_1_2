@@ -94,10 +94,10 @@
                                     </td>
                                     <td>
 
-                                        <button-edit th:data-user-id="${user.id}"
+                                        <a id="button-edit"th:data-user-id="${user.id}"
                                                      class="btn btn-outline-info" role="button-edit" data-toggle="modal"
                                                      data-target="#editModal">Edit
-                                        </button-edit>
+                                        </a>
                                     </td>
                                     <td>
                                         <a id="button-delete" th:data-user-id="${user.id}"
@@ -117,13 +117,14 @@
                             <div class="header-panel text-left">
                                 <h5>Add new user</h5>
                             </div>
-                            <div id="card-add-from" class="card-edit text-center">
+                            <div id="card-add-from" class="card-edit">
+
                                 <div class="col-md-4 mb-3">
                                     <label for="addName">First name</label>
-                                    <input type="text" class="form-control" id="addName" placeholder="name" required>
+                                    <input type="text" class="form-control" id="addName" placeholder="First name" required>
 
                                     <label for="addSurname">Last name</label>
-                                    <input type="text" class="form-control" id="addSurname" placeholder="surname"
+                                    <input type="text" class="form-control" id="addSurname" placeholder="Last name"
                                            required>
 
                                     <label for="addEmail">Email</label>
@@ -147,10 +148,10 @@
                                         <option value="ADMIN">ADMIN</option>
                                     </select>
                                 </div>
-
-                                <button class="btn btn-outline-info" type="button" id="addUserButton">Add new user
-                                </button>
                             </div>
+                                <button class="btn btn-outline-info text-center" type="button" id="addUserButton">Add new user
+                                </button>
+
                         </form>
                     </div>
                 </div>
@@ -161,6 +162,8 @@
 </div>
 
 <div th:insert="blocks/edit-user::edit-form"></div>
+
+<div th:insert="blocks/delete-user::delete-form"></div>
 
 
 <!-- JS, Popper.js, and jQuery -->
