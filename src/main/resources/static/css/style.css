@@ -1,23 +1,37 @@
-*{
-    margin:0px;
+* {
+    margin: 0px;
+}
+.form-row{
+
+    justify-content: center; /*Центрирование по горизонтали*/
+    align-items: center;     /*Центрирование по вертикали */
 }
 
+.modal-body {
 
-.modal-body{
+    padding-left: 90px;
+    padding-left: 90px;
+    justify-content: center; /*Центрирование по горизонтали*/
+    align-items: center;     /*Центрирование по вертикали */
+}
 
+#card-edit-from {
+    width: 80%;
     align-items: center;
 }
-.card-edit {
-    padding-right: 80px;
-    padding-left: 80px;
+
+#card-add-from {
+    align-items: center;
+    justify-content: center;
 
 }
 
-label{
+label {
     font-weight: bold
 }
 
-#role-select{
+#role-select {
     hight: 20px;
     weight: 60px;
 }
+

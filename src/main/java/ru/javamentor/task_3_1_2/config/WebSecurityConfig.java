@@ -3,6 +3,8 @@ package ru.javamentor.task_3_1_2.config;
 
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,8 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import ru.javamentor.task_3_1_2.config.handler.LoginSuccessHandler;
 import ru.javamentor.task_3_1_2.service.UserService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Configuration
@@ -31,9 +37,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .authorizeRequests()
-                .antMatchers("/static/css/**","/resources/**","/static/**", "/static/js/**").permitAll()
+                .antMatchers("/css/**","/fonts/**","/js/**").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/", "/registration", "/test", "/index", "/login").anonymous()
                 .antMatchers("/user", "/user/*", "/test", "/index").authenticated()
@@ -61,6 +68,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService)
                 .passwordEncoder(passwordEncoder);
     }
-
 
 }

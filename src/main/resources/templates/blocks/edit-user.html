@@ -4,69 +4,64 @@
     <div class="modal fade" id="editModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="form-edit" id="formEdit">
-            <form th:action="@{/admin/edit}" method="post">
+<!--            <form th:action="@{/admin/edit}" method="post">-->
+            <form>
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Edit user</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body ">
 
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <div id="card-edit-from" class="card-edit text-center">
+
+
+                                <label for="id">ID</label>
+                                <input type="text" id="id" class="form-control disable ">
+
+                                <label for="name">First name</label>
+                                <input type="text" id="name" class="form-control"
+                                       placeholder="name">
+
+
+                                <label for="surname">Last name</label>
+                                <input type="text" id="surname" class="form-control "
+                                       placeholder="surname">
+
+
+                                <label for="age">Age</label>
+                                <input type="text" id="age" class="form-control " placeholder="age">
+
+
+                                <label for="email">Email</label>
+                                <input type="text" id="email" class="form-control"
+                                       placeholder="email">
+
+
+                                <label for="password">Password</label>
+                                <input type="text" id="password" class="form-control"
+                                       placeholder="password">
+
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="text" id="confirmPassword" class="form-control"
+                                       placeholder="confirmPassword">
+
+                                <label for="role-select">Role</label>
+                                <select id="role-select" class="custom-select  mr-sm-2" multiple="multiple">
+                                    <option value="ADMIN">ADMIN</option>
+                                    <option value="USER">USER</option>
+                                </select>
                             </div>
-                            <div class="modal-body ">
-
-                                <div class="card-edit text-center">
-
-<!--                                    <input type="hidden" th:hidden="id" id="id">-->
-
-                                    <label  for="id">Id</label>
-                                    <input type="text" id="id" class="form-control disable ">
-
-                                    <label for="name">First name</label>
-                                    <div class="input-group-sm">
-                                        <input type="text" id="name" class="form-control"
-                                               placeholder="name">
-                                    </div>
-
-                                    <label for="surname">Last name</label>
-                                    <input type="text" id="surname" class="form-control "
-                                           placeholder="surname">
-
-
-                                    <label for="age">Age</label>
-                                    <input type="text" id="age" class="form-control " placeholder="age">
-
-
-                                    <label  for="email">Email</label>
-                                    <input type="text" id="email" class="form-control"
-                                           placeholder="email">
-
-
-                                    <label  for="password">Password</label>
-                                    <input type="text" id="password" class="form-control"
-                                           placeholder="password">
-
-                                    <label for="confirmPassword">Confirm Password</label>
-                                    <input type="text" id="confirmPassword" class="form-control"
-                                           placeholder="confirmPassword">
-
-                                    <label for="role-select">Role</label>
-                                    <select id="role-select" class="custom-select col-5 mx-sm-3" multiple="multiple" >
-                                        <option value="ADMIN">ADMIN</option>
-                                        <option value="USER">USER</option>
-                                    </select>
-
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Understood</button>
-                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline-primary">Edit</button>
                             </div>
                         </div>
                     </div>
+                </div>
 
             </form>
         </div>

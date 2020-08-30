@@ -19,6 +19,56 @@ $('document').ready(function () {
     // });
     // $('#editModal').showModal();
 //     });
+    $("#addUserButton").on('click', function () {
+
+
+            let roles = [];
+            $('#add-role-select :selected').each(function (i, selected) {
+                roles[i] = $(selected).val();
+            });
+            let data = {
+                name: $("#addName").val(),
+                login: $("#addSurname").val(),
+                email: $('#addEmail').val(),
+                age: $('#addAge').val(),
+                password: $("#addPassword").val(),
+                roles: roles
+            }
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin/add',
+            data: data,
+            dataType: 'html',
+            beforeSend:  console.log(data),
+            complete: [
+                function () {
+                    console.log("OK");
+
+                }
+            ]
+        }).done(function(msg) {
+            // parse response from msg
+        });
+        });
+
+
+
+    $("#v-pills-users-tab").on('click', function () {
+        const href = "/admin/role";
+        $.get(href, function (data) {
+            console.log(data);
+
+        });
+    });
+
+    $("#v-pills-newuser-tab").on('click', function () {
+        const href = "/admin/all";
+        $.get(href, function (data) {
+            console.log(data);
+
+        });
+    });
 
 
     $("#editModal").on('show.bs.modal', function (event) {

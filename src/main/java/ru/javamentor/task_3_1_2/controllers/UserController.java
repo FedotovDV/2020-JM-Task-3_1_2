@@ -144,10 +144,30 @@ public class UserController {
                return new User();
     }
 
+
+    @PostMapping({"/admin/add"})
+    @ResponseBody
+    public void addPost(@RequestBody String message) {
+
+        System.out.println(message);
+//        userService.saveUser(user);
+    }
+
+    @GetMapping("/admin/all")
+    @ResponseBody
+    public List<User> allGet() {
+        return  userService.findAll();
+    }
+
+
     @GetMapping("/admin/role")
     @ResponseBody
-    public HashSet<Role> roleGet() {
-        return new HashSet<Role>();
+    public Set<Role> roleGet() {
+        Set<Role> roles= new HashSet<Role>();
+       for(Role role: Role.values()){
+           roles.add(role);
+       }
+        return roles;
     }
 
 
