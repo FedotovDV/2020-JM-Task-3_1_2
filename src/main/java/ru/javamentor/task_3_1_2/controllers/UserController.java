@@ -1,6 +1,8 @@
 package ru.javamentor.task_3_1_2.controllers;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -115,6 +117,7 @@ public class UserController {
     public ModelAndView admin(ModelAndView modelAndView, Authentication authentication) {
         String titleRole = "ADMIN";
         List<User> users = userService.findAll();
+
 //        String email = authentication.getName();
 //        User user = (User) userService.loadUserByUsername(email);
 //        modelAndView.addObject("user", user);
@@ -132,10 +135,30 @@ public class UserController {
 
     @GetMapping("/admin/update")
     @ResponseBody
-    public   User updateUser(@RequestParam("id") Long id){
+    public   User updateUser(@RequestParam("id") Long id) throws JsonProcessingException {
         User user = userService.findById(id);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            //Convert object to JSON string
+            String jsonInString = mapper.writeValueAsString(user);
+            System.out.println(jsonInString);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return user;
     }
+
+
+    @PostMapping("/admin/update")
+    public ModelAndView updatePost(@ModelAttribute("admin/user") User user,
+                                   @RequestParam(value = "userRole", required = false) String userRole,
+                                   @RequestParam(value = "adminRole", required = false) String adminRole) {
+
+        setUserRoles(user, userRole, adminRole);
+        userService.saveUser(user);
+        return new ModelAndView("redirect:/admin");
+    }
+
 
     @GetMapping("/admin/delete")
     @ResponseBody
@@ -153,9 +176,17 @@ public class UserController {
 
     @PostMapping({"/admin/add"})
     @ResponseBody
-    public void addPost(@RequestBody String message) {
+    public void addPost(@ModelAttribute("user") User user,
+                        @RequestParam(value = "roles", required = false) String[] roles){
 
-        System.out.println(message);
+//        ObjectMapper mapper = new ObjectMapper();
+//        User user1 = mapper.readValue(jsonInString, User.class);
+//
+        System.out.println(user.toString());
+        for(String role: roles){
+            System.out.println(role);
+        }
+
 //        userService.saveUser(user);
     }
 

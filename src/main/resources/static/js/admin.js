@@ -19,39 +19,44 @@ $('document').ready(function () {
     // });
     // $('#editModal').showModal();
 //     });
-    $("#addUserButton").on('click', function () {
-
-
-            let roles = [];
-            $('#add-role-select :selected').each(function (i, selected) {
-                roles[i] = $(selected).val();
-            });
-            let data = {
-                name: $("#addName").val(),
-                login: $("#addSurname").val(),
-                email: $('#addEmail').val(),
-                age: $('#addAge').val(),
-                password: $("#addPassword").val(),
-                roles: roles
-            }
-
-        $.ajax({
-            type: 'POST',
-            url: '/admin/add',
-            data: data,
-            dataType: 'html',
-            beforeSend:  console.log(data),
-            complete: [
-                function () {
-                    console.log("OK");
-
-                }
-            ]
-        }).done(function(msg) {
-            // parse response from msg
-        });
-        });
-
+//     $("#addUserButton").on('click', function () {
+//
+//
+//         // let roles = new Set;
+//         // $('#add-role-select :selected').each(function (i, selected) {
+//         //     roles.add($(selected).val());
+//         // });
+//         let roles = [];
+//         $('#add-role-select :selected').each(function (i, selected) {
+//             roles[i]=$(selected).val();
+//         });
+//
+//         let user = {
+//             name: $("#addName").val(),
+//             surname: $("#addSurname").val(),
+//             email: $('#addEmail').val(),
+//             age: $('#addAge').val(),
+//             password: $("#addPassword").val(),
+//         }
+//         user = $.param(user);
+//
+//
+//         $.ajax({
+//             type: 'POST',
+//             url: '/admin/add',
+//             data: {user:user, roles:roles},
+//             dataType: 'html',
+//             beforeSend: console.log(roles),
+//             complete: [
+//                 function () {
+//                     console.log("OK");
+//
+//                 }
+//             ]
+//         }).done(function (msg) {
+//             // parse response from msg
+//         });
+//     });
 
 
     $("#v-pills-users-tab").on('click', function () {

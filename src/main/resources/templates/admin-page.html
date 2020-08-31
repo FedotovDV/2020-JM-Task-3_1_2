@@ -94,9 +94,9 @@
                                     </td>
                                     <td>
 
-                                        <a id="button-edit"th:data-user-id="${user.id}"
-                                                     class="btn btn-outline-info" role="button-edit" data-toggle="modal"
-                                                     data-target="#editModal">Edit
+                                        <a id="button-edit" th:data-user-id="${user.id}"
+                                           class="btn btn-outline-info" role="button-edit" data-toggle="modal"
+                                           data-target="#editModal">Edit
                                         </a>
                                     </td>
                                     <td>
@@ -117,31 +117,38 @@
                             <div class="header-panel text-left">
                                 <h5>Add new user</h5>
                             </div>
-                            <div id="card-add-from" class="card-edit">
+                            <div id="card-add-from" class="card-edit text-center">
 
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label for="addName">First name</label>
-                                    <input type="text" class="form-control" id="addName" placeholder="First name" required>
-
+                                    <input type="text" class="form-control" id="addName" placeholder="First name"
+                                           required>
+<!--                                </div>-->
+<!--                                <div class="col-md-7 mb-3">-->
                                     <label for="addSurname">Last name</label>
                                     <input type="text" class="form-control" id="addSurname" placeholder="Last name"
                                            required>
-
+<!--                                </div>-->
+<!--                                <div class="col-md-5 mb-3">-->
                                     <label for="addEmail">Email</label>
                                     <input type="text" class="form-control" id="addEmail" placeholder="Email" required>
-
+<!--                                </div>-->
+<!--                                <div class="col-md-5 mb-3">-->
                                     <label for="addAge">Age</label>
                                     <input type="text" class="form-control" id="addAge" placeholder="Age" required>
-
+<!--                                </div>-->
+<!--                                <div class="col-md-5 mb-3">-->
                                     <label for="addPassword">Password</label>
                                     <input type="text" id="addPassword"
                                            class="form-control"
                                            placeholder="password">
-
+<!--                                </div>-->
+<!--                                <div class="col-md-5 mb-3">-->
                                     <label for="addConfirmPassword">Confirm Password</label>
                                     <input type="text" id="addConfirmPassword" class="form-control"
                                            placeholder="confirmPassword">
-
+<!--                                </div>-->
+<!--                                <div class="col-md-5 mb-3">-->
                                     <label for="add-role-select">Role</label>
                                     <select class="custom-select" id="add-role-select" multiple="multiple" required>
                                         <option selected="selected" value="USER">USER</option>
@@ -149,9 +156,11 @@
                                     </select>
                                 </div>
                             </div>
-                                <button class="btn btn-outline-info text-center" type="button" id="addUserButton">Add new user
-                                </button>
+                            <div class="footer-panel text-center">
 
+                                <button class="btn btn-outline-info" type="button" id="addUserButton">Add new user
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
