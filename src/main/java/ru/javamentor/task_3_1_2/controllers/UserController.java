@@ -31,32 +31,6 @@ public class UserController {
         this.userValidator = userValidator;
     }
 
-    @GetMapping("/index")
-    public String indexGet(Model model) {
-
-        return "index";
-    }
-
-
-    @GetMapping("/test")
-    public ModelAndView testGet() {
-        ModelAndView modelAndView = new ModelAndView();
-        List<User> users = userService.findAll();
-        modelAndView.addObject("message", "MESSAGE");
-        modelAndView.setViewName("/test");
-        return modelAndView;
-    }
-
-
-    @PostMapping("/index")
-    public ModelAndView indexPost(@ModelAttribute("usernew") String user) {
-        System.out.println(user);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/index");
-        return modelAndView;
-    }
-
-
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("user", new User());
@@ -65,31 +39,18 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public ModelAndView saveUser(@ModelAttribute("user") User user, BindingResult result,
-                                 @RequestParam(value = "userRole", required = false) String userRole,
-                                 @RequestParam(value = "adminRole", required = false) String adminRole) {
+    public ModelAndView saveUser(@ModelAttribute("user") User user, BindingResult result) {
         ModelAndView modelAndView = new ModelAndView();
         userValidator.validate(user, result);
         if (result.hasErrors()) {
             modelAndView.setViewName("/registration");
             return modelAndView;
         }
-        setUserRoles(user, userRole, adminRole);
         userService.saveUser(user);
-        modelAndView.setViewName("/user");
+        modelAndView.setViewName("/login");
         return modelAndView;
     }
 
-    private void setUserRoles(@ModelAttribute("admin/user") User user, @RequestParam(value = "userRole", required = false) String userRole, @RequestParam(value = "adminRole", required = false) String adminRole) {
-        Set<Role> roles = new HashSet<>();
-        if (userRole != null) {
-            roles.add(Role.USER);
-        }
-        if (adminRole != null) {
-            roles.add(Role.ADMIN);
-        }
-        user.setRoles(roles);
-    }
 
     @GetMapping(value = "/user")
     public ModelAndView userForm(Authentication authentication) {
@@ -97,13 +58,13 @@ public class UserController {
         String email = authentication.getName();
 
         User user = (User) userService.loadUserByUsername(email);
-        String titleRole = "USER";
-        for (Role role : user.getRoles()) {
-            if (role.equals(Role.ADMIN)) {
-                titleRole = "ADMIN";
-                break;
-            }
-        }
+//        String titleRole = "USER";
+//        for (Role role : user.getRoles()) {
+//            if (role.equals(Role.ADMIN)) {
+//                titleRole = "ADMIN";
+//                break;
+//            }
+//        }
 
 //        modelAndView.addObject("titleRole", titleRole);
         modelAndView.addObject("user", user);
@@ -115,95 +76,97 @@ public class UserController {
 
     @GetMapping("/admin")
     public ModelAndView admin(ModelAndView modelAndView, Authentication authentication) {
-        String titleRole = "ADMIN";
         List<User> users = userService.findAll();
-
-//        String email = authentication.getName();
-//        User user = (User) userService.loadUserByUsername(email);
-//        modelAndView.addObject("user", user);
-//        modelAndView.addObject("roles", new HashSet<Role>());
-        modelAndView.addObject("titleRole", titleRole);
         modelAndView.addObject("users", users);
         modelAndView.addObject("authentication", authentication);
         modelAndView.addObject("usernew", new User());
-        modelAndView.addObject("rolesnew", new HashSet<Role>());
+//        modelAndView.addObject("rolesnew", new HashSet<Role>());
         modelAndView.setViewName("/admin-page");
         return modelAndView;
     }
 
 
-
     @GetMapping("/admin/update")
-    @ResponseBody
-    public   User updateUser(@RequestParam("id") Long id) throws JsonProcessingException {
+    public ModelAndView updateUser(@RequestParam("id") Long id, ModelAndView modelAndView) {
         User user = userService.findById(id);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            //Convert object to JSON string
-            String jsonInString = mapper.writeValueAsString(user);
-            System.out.println(jsonInString);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return user;
+        modelAndView.addObject("userEdit", user);
+        modelAndView.setViewName("/edit-user");
+        return modelAndView;
     }
 
 
     @PostMapping("/admin/update")
-    public ModelAndView updatePost(@ModelAttribute("admin/user") User user,
-                                   @RequestParam(value = "userRole", required = false) String userRole,
-                                   @RequestParam(value = "adminRole", required = false) String adminRole) {
-
-        setUserRoles(user, userRole, adminRole);
+    public ModelAndView updatePost(@ModelAttribute("userEdit") User user) {
         userService.saveUser(user);
         return new ModelAndView("redirect:/admin");
     }
 
 
     @GetMapping("/admin/delete")
-    @ResponseBody
-    public   User deleteUser(@RequestParam("id") Long id){
+    public ModelAndView deleteUser(@RequestParam("id") Long id, ModelAndView modelAndView) {
         User user = userService.findById(id);
-        return user;
+        modelAndView.addObject("userDelete", user);
+        modelAndView.setViewName("/delete-user");
+        return modelAndView;
     }
+
+
+    @PostMapping("/admin/delete{id}")
+    public ModelAndView deletePost(@RequestParam("id") Long id, ModelAndView model) {
+        userService.deleteById(id);
+        return new ModelAndView("redirect:/admin");
+    }
+
 
     @GetMapping("/admin/add")
     @ResponseBody
     public User addGet() {
-               return new User();
+        return new User();
     }
-
 
     @PostMapping({"/admin/add"})
-    @ResponseBody
-    public void addPost(@ModelAttribute("user") User user,
-                        @RequestParam(value = "roles", required = false) String[] roles){
+    public ModelAndView addPost(@ModelAttribute("usernew") User user, BindingResult result) {
 
-//        ObjectMapper mapper = new ObjectMapper();
-//        User user1 = mapper.readValue(jsonInString, User.class);
-//
-        System.out.println(user.toString());
-        for(String role: roles){
-            System.out.println(role);
+        userValidator.validate(user, result);
+        if (result.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("/admin");
+            return modelAndView;
         }
 
-//        userService.saveUser(user);
+        userService.saveUser(user);
+        return new ModelAndView("redirect:/admin");
     }
+//    @PostMapping({"/admin/add"})
+//    @ResponseBody
+//    public void addPost(@ModelAttribute("user") User user,
+//                        @RequestParam(value = "roles", required = false) String[] roles){
+//
+////        ObjectMapper mapper = new ObjectMapper();
+////        User user1 = mapper.readValue(jsonInString, User.class);
+////
+//        System.out.println(user.toString());
+//        for(String role: roles){
+//            System.out.println(role);
+//        }
+//
+////        userService.saveUser(user);
+//    }
 
     @GetMapping("/admin/all")
     @ResponseBody
     public List<User> allGet() {
-        return  userService.findAll();
+        return userService.findAll();
     }
 
 
     @GetMapping("/admin/role")
     @ResponseBody
     public Set<Role> roleGet() {
-        Set<Role> roles= new HashSet<Role>();
-       for(Role role: Role.values()){
-           roles.add(role);
-       }
+        Set<Role> roles = new HashSet<Role>();
+        for (Role role : Role.values()) {
+            roles.add(role);
+        }
         return roles;
     }
 

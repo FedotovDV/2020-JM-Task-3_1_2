@@ -1,0 +1,63 @@
+<div th:fragment="edit-form">
+
+
+    <!--    <div class="modal fade" id="editModal" data-backdrop="static" data-keyboard="false" tabindex="-1"-->
+    <!--         aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+    <div class="form-edit" id="formEdit">
+        <form action="#" th:action="@{/admin/update}" th:object="${userEdit}" method="post">
+            <!--            <form>-->
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit user</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ">
+
+                        <div id="card-edit-from" class="card-edit text-center">
+
+
+                            <label for="id">ID</label>
+                            <input type="text" id="id" th:field="*{id}" class="form-control disable ">
+
+                            <label for="name">First name</label>
+                            <input type="text" id="name" th:field="*{name}" class="form-control">
+
+
+                            <label for="surname">Last name</label>
+                            <input type="text" id="surname" th:field="*{surname}" class="form-control ">
+
+                            <label for="email">Email</label>
+                            <input type="text" id="email" th:field="*{email}" class="form-control">
+
+
+                            <label for="age">Age</label>
+                            <input type="text" id="age" th:field="*{age}" class="form-control ">
+
+
+                            <label for="password">Password</label>
+                            <input type="text" id="password" th:field="*{password}" class="form-control">
+
+
+                            <label for="role-select">Role</label>
+                            <select id="role-select" class="custom-select  mr-sm-2" th:field="*{roles}"
+                                    multiple="multiple">
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="USER">USER</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <button id="edit-button" type="submit" class="btn btn-outline-primary">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!--</div>-->
