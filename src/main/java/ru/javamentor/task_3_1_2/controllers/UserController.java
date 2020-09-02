@@ -1,8 +1,7 @@
 package ru.javamentor.task_3_1_2.controllers;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,6 @@ import ru.javamentor.task_3_1_2.service.UserService;
 import ru.javamentor.task_3_1_2.util.UserValidator;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -58,15 +56,6 @@ public class UserController {
         String email = authentication.getName();
 
         User user = (User) userService.loadUserByUsername(email);
-//        String titleRole = "USER";
-//        for (Role role : user.getRoles()) {
-//            if (role.equals(Role.ADMIN)) {
-//                titleRole = "ADMIN";
-//                break;
-//            }
-//        }
-
-//        modelAndView.addObject("titleRole", titleRole);
         modelAndView.addObject("user", user);
         modelAndView.addObject("authentication", authentication);
         modelAndView.setViewName("/user");
@@ -80,7 +69,6 @@ public class UserController {
         modelAndView.addObject("users", users);
         modelAndView.addObject("authentication", authentication);
         modelAndView.addObject("usernew", new User());
-//        modelAndView.addObject("rolesnew", new HashSet<Role>());
         modelAndView.setViewName("/admin-page");
         return modelAndView;
     }
@@ -137,21 +125,7 @@ public class UserController {
         userService.saveUser(user);
         return new ModelAndView("redirect:/admin");
     }
-//    @PostMapping({"/admin/add"})
-//    @ResponseBody
-//    public void addPost(@ModelAttribute("user") User user,
-//                        @RequestParam(value = "roles", required = false) String[] roles){
-//
-////        ObjectMapper mapper = new ObjectMapper();
-////        User user1 = mapper.readValue(jsonInString, User.class);
-////
-//        System.out.println(user.toString());
-//        for(String role: roles){
-//            System.out.println(role);
-//        }
-//
-////        userService.saveUser(user);
-//    }
+
 
     @GetMapping("/admin/all")
     @ResponseBody
